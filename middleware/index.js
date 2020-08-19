@@ -1,8 +1,11 @@
 const jwksRsa = require('jwks-rsa');
 const jwt = require('express-jwt');
 
-const logger = () => {}
-
+const logger = (req, res, next) => {
+  console.log('Logging route:', req.path, new Date().toISOString());
+  next();
+}
+console.log(process.env.AUTH0_DOMAIN)
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
